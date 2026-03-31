@@ -61,10 +61,10 @@ def validate_student_id(sid: str) -> bool:
 
 def build_download_content(data: dict, fmt: str) -> tuple:
     """Return (content_bytes, mime_type) for a given format."""
-    if fmt == "json":
+    if format == "json":
         content = json.dumps(data, indent=4).encode("utf-8")
         mime = "application/json"
-    elif fmt == "csv":
+    elif format == "csv":
         buf = io.StringIO()
         writer = csv.writer(buf)
         for k, v in data.items():
@@ -105,11 +105,11 @@ if st.session_state.page == "menu":
     st.subheader("Welcome")
     col1, col2 = st.columns(2)
     with col1:
-        if st.button("🆕 Start a new survey", use_container_width=True):
+        if st.button("Start a new survey", use_container_width=True):
             st.session_state.page = "details"
             st.rerun()
     with col2:
-        if st.button("📂 Load existing results", use_container_width=True):
+        if st.button("Load existing results", use_container_width=True):
             st.session_state.page = "load"
             st.rerun()
 
@@ -120,18 +120,18 @@ elif st.session_state.page == "load":
         "Upload your result file", type=["json", "csv", "txt"])
 
     if uploaded:
-        fmt = uploaded.name.rsplit(".", 1)[-1].lower()
+        format = uploaded.name.rsplit(".", 1)[-1].lower()
         raw = uploaded.read().decode("utf-8")
 
         st.markdown("### Loaded Results")
-        if fmt == "json":
+        if format == "json":
             try:
                 data = json.loads(raw)
                 for k, v in data.items():
                     st.write(f"**{k}:** {v}")
             except json.JSONDecodeError:
                 st.error("Could not parse JSON file.")
-        elif fmt in ("csv", "txt"):
+        elif format in ("csv", "txt"):
             st.text(raw)
         else:
             st.error("Unsupported format.")
@@ -149,7 +149,7 @@ elif st.session_state.page == "details":
     dob = st.text_input("Date of birth (DD/MM/YYYY)",
                         value=st.session_state.dob, placeholder="e.g. 15/03/2004")
     sid = st.text_input("Student ID (digits only)",
-                        value=st.session_state.sid, placeholder="e.g. 123456")
+                        value=st.session_state.sid, placeholder="e.g. 00012345")
 
     if st.button("Continue →"):
         errors = []
@@ -237,13 +237,13 @@ elif st.session_state.page == "results":
 
     # Colour-coded result
     if total <= 13:
-        st.success(f"✅ {state}")
+        st.success(f"{state}")
     elif total <= 27:
-        st.info(f"ℹ️ {state}")
+        st.info(f"{state}")
     elif total <= 41:
-        st.warning(f"⚠️ {state}")
+        st.warning(f"{state}")
     else:
-        st.error(f"🚨 {state}")
+        st.error(f"{state}")
 
     st.markdown("---")
     st.markdown(f"**Name:** {st.session_state.name}")
@@ -265,13 +265,13 @@ elif st.session_state.page == "results":
     filename = f"result_{st.session_state.sid}.{fmt}"
 
     st.download_button(
-        label=f"⬇️ Download as .{fmt}",
+        label=f"Download as .{fmt}",
         data=content,
         file_name=filename,
         mime=mime,
     )
 
-    if st.button("🔄 Start over"):
+    if st.button("Start over"):
         for k in ["name", "dob", "sid", "answers", "total", "state_label"]:
             st.session_state[k] = "" if isinstance(
                 st.session_state[k], str) else 0 if isinstance(st.session_state[k], int) else []
