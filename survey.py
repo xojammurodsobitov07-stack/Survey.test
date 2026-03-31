@@ -65,11 +65,11 @@ def validate_student_id(sid: str) -> bool:
     return sid.isdigit() and len(sid) > 0
  
  
-def build_download(data: dict, fmt: str) -> tuple:
-    if format == "json":                           # if / elif / else
+def build_download(data: dict, file_format: str) -> tuple:
+    if file_format == "json":                           # if / elif / else
         content = json.dumps(data, indent=4).encode("utf-8")
         mime = "application/json"
-    elif format == "csv":
+    elif file_format == "csv":
         buf = io.StringIO()
         writer = csv.writer(buf)
         for k, v in data.items():
@@ -84,7 +84,7 @@ def build_download(data: dict, fmt: str) -> tuple:
  
 # --- Session state ---
 def init_state():
-    defaults = {"page": "menu", "name": "", "dob": "", "sid": "", "total": 0, "state_label": ""}
+    defaults = {"page": "menu", "name": "", "date_of_birth": "", "sid": "", "total": 0, "state_label": ""}
     for k, v in defaults.items():
         if k not in st.session_state:
             st.session_state[k] = v
@@ -92,7 +92,7 @@ def init_state():
  
 init_state()
 questions: list = get_questions("questions.json")
-st.title(f"📋 {survey_title}")
+st.title(f"{survey_title}")
 st.divider()
  
 # ── MENU ──────────────────────────────────────────────────────────────────────
@@ -209,25 +209,25 @@ elif st.session_state.page == "results":
  
     st.markdown("---")
     st.write(f"**Name:** {st.session_state.name}")
-    st.write(f"**Date of Birth:** {st.session_state.dob}")
+    st.write(f"**Date of Birth:** {st.session_state.date_of_birth}")
     st.write(f"**Student ID:** {st.session_state.sid}")
     st.markdown("---")
  
     st.subheader("Save Results")
-    format = st.selectbox("Choose format", allowed_formats)
+    file_format = st.selectbox("Choose format", allowed_formats)
     result_data: dict = {
         "name": st.session_state.name,
-        "date_of_birth": st.session_state.dob,
+        "date_of_birth": st.session_state.date_of_birth,
         "student_id": st.session_state.sid,
         "total_score": total,
         "psychological_state": state
     }
-    content, mime = build_download(result_data, fmt)
-    st.download_button(f"⬇ Download as .{fmt}", data=content,
-                       file_name=f"result_{st.session_state.sid}.{fmt}", mime=mime)
+    content, mime = build_download(result_data, file_format)
+    st.download_button(f"Download as .{file_format}", data=content,
+                       file_name=f"result_{st.session_state.sid}.{file_format}", mime=mime)
  
-    if st.button("🔄 Start over"):
-        for k in ["name", "dob", "sid", "state_label"]:
+    if st.button("Start over"):
+        for k in ["name", "date_of_birth", "sid", "state_label"]:
             st.session_state[k] = ""
         st.session_state.total = 0
         st.session_state.page  = "menu"
