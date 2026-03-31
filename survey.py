@@ -48,15 +48,15 @@ def validate_name(name: str) -> bool:
     return True
  
  
-def validate_dob(dob: str) -> bool:
-    parts: list = dob.split("/")
+def validate_date_of_birth (date_of_birth: str) -> bool:
+    parts: list = date_of_birth.split("/")
     i: int = 0
     while i < len(parts):                       # while loop — input validation
         if not parts[i].isdigit():
             return False
         i += 1
     try:
-        return datetime.strptime(dob, "%d/%m/%Y") <= datetime.now()
+        return datetime.strptime(date_of_birth, "%d/%m/%Y") <= datetime.now()
     except ValueError:
         return False
  
@@ -66,10 +66,10 @@ def validate_student_id(sid: str) -> bool:
  
  
 def build_download(data: dict, fmt: str) -> tuple:
-    if fmt == "json":                           # if / elif / else
+    if format == "json":                           # if / elif / else
         content = json.dumps(data, indent=4).encode("utf-8")
         mime = "application/json"
-    elif fmt == "csv":
+    elif format == "csv":
         buf = io.StringIO()
         writer = csv.writer(buf)
         for k, v in data.items():
@@ -101,11 +101,11 @@ if st.session_state.page == "menu":
     st.write("This survey measures how extracurricular activities affect your study stress.")
     col1, col2 = st.columns(2)
     with col1:
-        if st.button("▶ Start a new survey", use_container_width=True):
+        if st.button("Start a new survey", use_container_width=True):
             st.session_state.page = "details"
             st.rerun()
     with col2:
-        if st.button("📂 Load existing results", use_container_width=True):
+        if st.button("Load existing results", use_container_width=True):
             st.session_state.page = "load"
             st.rerun()
  
@@ -133,14 +133,14 @@ elif st.session_state.page == "load":
 elif st.session_state.page == "details":
     st.subheader("Your Details")
     name = st.text_input("Full name", placeholder="e.g. Alice O'Brien")
-    dob  = st.text_input("Date of birth (DD/MM/YYYY)", placeholder="e.g. 15/03/2004")
+    date_of_birth  = st.text_input("Date of birth (DD/MM/YYYY)", placeholder="e.g. 15/03/2004")
     sid  = st.text_input("Student ID (digits only)", placeholder="e.g. 00012345")
  
     if st.button("Continue →"):
         errors: list = []
         if not validate_name(name):
             errors.append("Name invalid — only letters, hyphens, apostrophes and spaces allowed.")
-        if not validate_dob(dob):
+        if not validate_date_of_birth (date_of_birth):
             errors.append("Date of birth must be DD/MM/YYYY and not in the future.")
         if not validate_student_id(sid):
             errors.append("Student ID must contain digits only.")
@@ -151,7 +151,7 @@ elif st.session_state.page == "details":
                 st.error(e)
         else:
             st.session_state.name = name
-            st.session_state.dob  = dob
+            st.session_state.dob  = date_of_birth
             st.session_state.sid  = sid
             seen_ids.add(sid)
             st.session_state.page = "survey"
@@ -214,7 +214,7 @@ elif st.session_state.page == "results":
     st.markdown("---")
  
     st.subheader("Save Results")
-    fmt = st.selectbox("Choose format", allowed_formats)
+    format = st.selectbox("Choose format", allowed_formats)
     result_data: dict = {
         "name": st.session_state.name,
         "date_of_birth": st.session_state.dob,
