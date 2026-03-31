@@ -1,0 +1,22 @@
+[
+  {"question": "How much of your study time is taken up by extracurricular activities each week?", "options": ["None at all", "A small portion", "About half", "Most of it", "All of it"], "scores": [0, 1, 2, 3, 4]},
+  {"question": "How often do you feel behind on academic work because of extracurricular commitments?", "options": ["Never", "Once in a while", "Fairly regularly", "Most of the time", "Constantly"], "scores": [0, 1, 2, 3, 4]},
+  {"question": "How difficult is it to complete assignments on time while maintaining extracurricular involvement?", "options": ["Not difficult at all", "Slightly difficult", "Moderately difficult", "Very difficult", "Extremely difficult"], "scores": [0, 1, 2, 3, 4]},
+  {"question": "How often do you sacrifice study sessions to attend extracurricular activities?", "options": ["Never", "Rarely", "Sometimes", "Frequently", "Always"], "scores": [0, 1, 2, 3, 4]},
+  {"question": "How often do you feel overwhelmed trying to keep up with both academic and extracurricular demands?", "options": ["Never", "Rarely", "Occasionally", "Often", "Constantly"], "scores": [0, 1, 2, 3, 4]},
+  {"question": "How frequently do extracurricular activities improve your mood and reduce academic tension?", "options": ["Always", "Often", "Sometimes", "Rarely", "Never"], "scores": [0, 1, 2, 3, 4]},
+  {"question": "How often do you feel guilty for spending time on extracurricular activities instead of studying?", "options": ["Never", "Rarely", "Sometimes", "Frequently", "Always"], "scores": [0, 1, 2, 3, 4]},
+  {"question": "How often do you feel a sense of purpose or achievement through extracurricular participation?", "options": ["Always", "Often", "Occasionally", "Rarely", "Never"], "scores": [0, 1, 2, 3, 4]},
+  {"question": "How often do extracurricular activities cause you to reduce your sleep hours?", "options": ["Never", "Rarely", "Sometimes", "Often", "Always"], "scores": [0, 1, 2, 3, 4]},
+  {"question": "How frequently do you feel physically worn out during class due to extracurricular activities?", "options": ["Never", "Rarely", "Sometimes", "Often", "Always"], "scores": [0, 1, 2, 3, 4]},
+  {"question": "How often do you feel energized or refreshed after engaging in extracurricular activities?", "options": ["Always", "Often", "Sometimes", "Rarely", "Never"], "scores": [0, 1, 2, 3, 4]},
+  {"question": "How often do you struggle to focus on studying due to mental fatigue from extracurricular activities?", "options": ["Never", "Rarely", "Sometimes", "Frequently", "Always"], "scores": [0, 1, 2, 3, 4]},
+  {"question": "How frequently do you feel your academic results have suffered due to extracurricular involvement?", "options": ["Never", "Rarely", "On a few occasions", "Regularly", "Consistently"], "scores": [0, 1, 2, 3, 4]},
+  {"question": "How often do extracurricular activities sharpen your focus or discipline when studying?", "options": ["Always", "Often", "Sometimes", "Rarely", "Never"], "scores": [0, 1, 2, 3, 4]},
+  {"question": "How often do you feel pressured to perform well in both academics and extracurricular activities?", "options": ["Never", "Rarely", "Sometimes", "Often", "Always"], "scores": [0, 1, 2, 3, 4]},
+  {"question": "How often do your extracurricular peers help you cope with academic stress?", "options": ["Always", "Often", "Sometimes", "Rarely", "Never"], "scores": [0, 1, 2, 3, 4]},
+  {"question": "How frequently do you use extracurricular activities as a healthy mental break from studies?", "options": ["Always", "Often", "Sometimes", "Rarely", "Never"], "scores": [0, 1, 2, 3, 4]},
+  {"question": "How often do you feel socially disconnected when you cut back on extracurriculars during exams?", "options": ["Never", "Rarely", "Sometimes", "Often", "Always"], "scores": [0, 1, 2, 3, 4]},
+  {"question": "How often do you feel the balance between extracurricular and academic life is within your control?", "options": ["Always", "Often", "Sometimes", "Rarely", "Never"], "scores": [0, 1, 2, 3, 4]},
+  {"question": "How confident are you that extracurricular involvement will positively affect your university experience?", "options": ["Very confident", "Confident", "Unsure", "Doubtful", "Not confident at all"], "scores": [0, 1, 2, 3, 4]}
+]
