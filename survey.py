@@ -122,12 +122,13 @@ elif st.session_state.page == "load":
     if uploaded:
         fmt = uploaded.name.rsplit(".", 1)[-1].lower()
         raw = uploaded.read().decode("utf-8")
-[3/31/2026 1:49 PM] Muhammadjon Baxritdinov: st.markdown("### Loaded Results")
+
+        st.markdown("### Loaded Results")
         if fmt == "json":
             try:
                 data = json.loads(raw)
                 for k, v in data.items():
-                    st.write(f"{k}: {v}")
+                    st.write(f"**{k}:** {v}")
             except json.JSONDecodeError:
                 st.error("Could not parse JSON file.")
         elif fmt in ("csv", "txt"):
@@ -182,7 +183,7 @@ elif st.session_state.page == "details":
 # ── PAGE: survey ──────────────────────────────────────────────────────────────
 elif st.session_state.page == "survey":
     st.subheader("Survey Questions")
-    st.info("Answer every question, then click Submit.")
+    st.info("Answer every question, then click **Submit**.")
 
     if not questions:
         st.error("questions.json not found.")
@@ -193,7 +194,7 @@ elif st.session_state.page == "survey":
 
     with st.form("survey_form"):
         for i, q in enumerate(questions):
-            st.markdown(f"Q{i+1}. {q['question']}")
+            st.markdown(f"**Q{i+1}. {q['question']}**")
             choice = st.radio(
                 label=f"q{i}",
                 options=q["options"],
@@ -233,7 +234,8 @@ elif st.session_state.page == "results":
 
     col1, col2 = st.columns(2)
     col1.metric("Total Score", f"{total} / {max_score}")
-[3/31/2026 1:49 PM] Muhammadjon Baxritdinov: # Colour-coded result
+
+    # Colour-coded result
     if total <= 13:
         st.success(f"✅ {state}")
     elif total <= 27:
@@ -244,9 +246,9 @@ elif st.session_state.page == "results":
         st.error(f"🚨 {state}")
 
     st.markdown("---")
-    st.markdown(f"Name: {st.session_state.name}")
-    st.markdown(f"Date of Birth: {st.session_state.dob}")
-    st.markdown(f"Student ID: {st.session_state.sid}")
+    st.markdown(f"**Name:** {st.session_state.name}")
+    st.markdown(f"**Date of Birth:** {st.session_state.dob}")
+    st.markdown(f"**Student ID:** {st.session_state.sid}")
 
     st.markdown("---")
     st.subheader("Save Results")
